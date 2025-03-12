@@ -39,6 +39,9 @@ export const IMAGES = {
   docBg: require('../assets/images/Rectangle8036.png'),
   userProfile1: require('../assets/images/user1.png'),
   userProfile2: require('../assets/images/user2.png'),
+  docPro: require('../assets/images/Rectangle4089.png'),
+  blueBg: require('../assets/images/Rectangle5679.png'),
+
   /*...icon......*/
   blueRight: require('../assets/icon/blueRight.png'),
   arrow: require('../assets/icon/arrow.png'),
@@ -100,4 +103,17 @@ export const IMAGES = {
   peopleIcon: require('../assets/icon/fluent_people-16-regular.png'),
   emptyStarIcon: require('../assets/icon/material-symbols_star-outline-rounded.png'),
   whiteStarIcon: require('../assets/icon/white_star.png'),
+  rightArrow: require('../assets/icon/Group.png'),
+  nextArrow: require('../assets/icon/Group4.png'),
+  selectIcon: require('../assets/icon/PUSHB.png'),
+  deselectIcon: require('../assets/icon/PUSHB(1).png'),
+  onlineDoc: require('../assets/icon/onlineDoc.png'),
+  clinic: require('../assets/icon/clinic.png'),
+  videoIcon: require('../assets/icon/camera-movie1.png'),
+  telephoneIcon: require('../assets/icon/phone-call1.png'),
+  chatIcon: require('../assets/icon/chat.png'),
+  selfIcon: require('../assets/icon/Self.png'),
+  familyIcon: require('../assets/icon/Family.png'),
+  crossIcon: require('../assets/icon/Frame758531022.png'),
+  uploadIcon: require('../assets/icon/cuida_upload-outline.png'),
 };

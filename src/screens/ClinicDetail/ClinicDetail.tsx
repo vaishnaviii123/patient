@@ -90,6 +90,7 @@ const ClinicDetail: React.FC<ClinicDetailInterface> = () => {
           <Text style={styles.headerTxt}>
             {LanguageSelected.clinicDetail[languageKey]}
           </Text>
+          <Text />
         </View>
         <View style={styles.Container}>
           <Text style={styles.clinicName}>Apple Hospital</Text>
