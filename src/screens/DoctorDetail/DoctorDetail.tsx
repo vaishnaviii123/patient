@@ -68,6 +68,7 @@ const DoctorDetail: React.FC<DoctorDetailInterface> = props => {
             <Text style={styles.headerTxt}>
               {LanguageSelected.doctorDetail[languageKey]}
             </Text>
+            <Text />
           </View>
           <ImageBackground
             source={IMAGES.docImg}
@@ -225,6 +226,19 @@ const DoctorDetail: React.FC<DoctorDetailInterface> = props => {
             </View>
           </View>
         </ScrollView>
+        <View style={styles.fixedButtonContainer}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('QuestionScreen')}>
+            <View style={styles.innerContainer}>
+              <View style={styles.rightArrowContainer}>
+                <Image source={IMAGES.rightArrow} style={styles.rightArrow} />
+              </View>
+              <Text style={styles.bookNowText}>
+                {LanguageSelected.bookNow[languageKey]}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   );

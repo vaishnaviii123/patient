@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: horizontalScale(270),
     padding: 20,
   },
   backIcon: {

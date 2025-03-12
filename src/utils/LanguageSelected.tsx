@@ -359,6 +359,118 @@ const LanguageSelected = {
     AR: 'غير متصل',
     FN: 'Hors ligne',
   },
+  bookNow: {
+    EN: 'Book Now',
+    AR: 'احجز الآن',
+    FN: 'Réservez maintenant',
+  },
+
+  bookAnAppoinment: {
+    EN: 'Book an Appointment',
+    AR: 'حجز موعد',
+    FN: 'Prendre un rendez-vous',
+  },
+  question: {
+    EN: 'Question',
+    AR: 'سؤال',
+    FN: 'Question',
+  },
+  options: {
+    EN: 'Options',
+    AR: 'الخيارات',
+    FN: 'Options',
+  },
+  back: {
+    EN: 'Back',
+    AR: 'رجوع',
+    FN: 'Retour',
+  },
+  next: {
+    EN: 'Next',
+    AR: 'التالي',
+    FN: 'Suivant',
+  },
+  getAppointment: {
+    EN: 'Get Appointment',
+    AR: 'احجز موعدًا',
+    FN: 'Prendre rendez-vous',
+  },
+  clinic: {
+    EN: 'Clinic',
+    AR: 'عيادة',
+    FN: 'Clinique',
+  },
+  selectAppointmentType: {
+    EN: 'Select Appointment Type',
+    AR: 'اختر نوع الموعد',
+    FN: 'Sélectionnez le type de rendez-vous',
+  },
+  selectAppointmentMode: {
+    EN: 'Select Appointment Mode',
+    AR: 'اختر وضع الموعد',
+    FN: 'Sélectionner le mode de rendez-vous',
+  },
+  video: {
+    EN: 'Video',
+    AR: 'فيديو',
+    FN: 'Vidéo',
+  },
+  voice: {
+    EN: 'Voice',
+    AR: 'صوت',
+    FN: 'Voix',
+  },
+  chat: {
+    EN: 'Chat',
+    AR: 'دردشة',
+    FN: 'Chat',
+  },
+  selectDateAndTime: {
+    EN: 'Select Date & Time',
+    AR: 'اختر التاريخ والوقت',
+    FN: "Sélectionner la date et l'heure",
+  },
+  morningSet: {
+    EN: 'Morning Set',
+    AR: 'مجموعة الصباح',
+    FN: 'Ensemble du Matin',
+  },
+  afternoonSet: {
+    EN: 'Afternoon Set',
+    AR: 'مجموعة بعد الظهر',
+    FN: "Ensemble de l'après-midi",
+  },
+  bookingAppointmentFor: {
+    EN: 'Booking Appointment For',
+    AR: 'حجز موعد ل',
+    FN: 'Prise de rendez-vous pour',
+  },
+  self: {
+    EN: 'Self',
+    AR: 'نفس',
+    FN: 'Soi',
+  },
+  family: {
+    EN: 'Family',
+    AR: 'عائلة',
+    FN: 'Famille',
+  },
+  doYouWantTo: {
+    EN: 'Do You Want To',
+    AR: 'هل تريد',
+    FN: 'Voulez-vous',
+  },
+  uploadPrescription: {
+    EN: 'Upload Prescription ?',
+    AR: 'تحميل الوصفة الطبية؟',
+    FN: 'Télécharger une ordonnance ?',
+  },
+  // searchDoctorScreen
+  search: {
+    EN: 'Search',
+    AR: 'بحث',
+    FN: 'Recherche',
+  },
 };
 
 export default LanguageSelected;

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   verticalScale,
   horizontalScale,
@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    width: horizontalScale(270),
     padding: 20,
     paddingBottom: 0,
     // backgroundColor:'red',
@@ -374,6 +373,46 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.SemiBold,
     fontSize: fontScale(16),
     color: '#FFB063',
+  },
+  fixedButtonContainer: {
+    width: horizontalScale(360),
+    height: verticalScale(70),
+    position: 'absolute',
+    left: 14,
+    top: 520,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#0099FF',
+    paddingVertical: verticalScale(8),
+    borderRadius: radiusScale(102),
+  },
+  innerContainer: {
+    width: horizontalScale(340),
+    height: verticalScale(55),
+    paddingVertical: verticalScale(8),
+    borderRadius: radiusScale(102),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    // backgroundColor:'red',
+    paddingRight: horizontalScale(5),
+  },
+  rightArrowContainer: {
+    width: horizontalScale(52),
+    height: verticalScale(52),
+    borderRadius: radiusScale(40),
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rightArrow: {
+    width: horizontalScale(20),
+    height: verticalScale(20),
+  },
+  bookNowText: {
+    fontFamily: Fonts.Bold,
+    fontSize: fontScale(16),
+    color: '#FFFFFF',
   },
 });
 export default styles;
