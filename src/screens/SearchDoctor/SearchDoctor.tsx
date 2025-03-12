@@ -13,7 +13,11 @@ import {
 import {IMAGES} from '../../assets';
 import styles from './SearchDoctorStyle';
 import {SearchDoctorInterface} from './SearchDoctorInterface';
-const SearchDoctor: React.FC<SearchDoctorInterface> = (props) => {
+import AuthStore from '../../zustand/store/AuthStore';
+import LanguageSelected from '../../utils/LanguageSelected';
+const SearchDoctor: React.FC<SearchDoctorInterface> = props => {
+  const {language} = AuthStore();
+  const languageKey = language as keyof typeof LanguageSelected.Medicine;
   const [selectedCategory, setSelectedCategory] = useState('Doctor');
 
   const categories = [
@@ -102,7 +106,8 @@ const SearchDoctor: React.FC<SearchDoctorInterface> = (props) => {
     };
   }) => (
     <View style={styles.doctorCard}>
-      <TouchableOpacity onPress={()=>props.navigation.navigate('DoctorDetail')}>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('DoctorDetail')}>
         <View style={styles.doctorInfo}>
           <Image source={item.image} style={styles.doctorImage} />
           <View style={styles.doctorDetails}>
@@ -194,12 +199,15 @@ const SearchDoctor: React.FC<SearchDoctorInterface> = (props) => {
               style={styles.backArrow}
               source={IMAGES.whitebackArrow}
             />
-            <Text style={styles.search}>Search</Text>
+            <Text style={styles.search}>
+     
+              {LanguageSelected.search[languageKey]}
+            </Text>
             <View />
           </View>
           <View style={styles.searchBarContainer}>
             <Image source={IMAGES.searchIcon} style={styles.searchIcon} />
-            <TextInput style={styles.searchInput} placeholder="Search" />
+            <TextInput style={styles.searchInput} placeholder={LanguageSelected.search[languageKey]} />
             <Image source={IMAGES.filterIcon} style={styles.filterIcon} />
           </View>
         </View>

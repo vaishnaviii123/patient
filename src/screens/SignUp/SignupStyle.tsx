@@ -100,6 +100,11 @@ const SignupStyle = () => {
     arrowIcon: {
       marginTop: verticalMarginScale(80),
     },
+    errorText: {
+      color: 'red',
+      fontSize: 12,
+      marginTop: 4,
+    },
   });
 };
 export default SignupStyle;

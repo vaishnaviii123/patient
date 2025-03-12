@@ -20,6 +20,9 @@ import {format} from 'date-fns';
 import CongratulationScreen from '../CongratulationScreen/Congratulation';
 import LanguageSelected from '../../utils/LanguageSelected';
 import AuthStore from '../../zustand/store/AuthStore';
+import { ToastMsg } from '../../Component/ToastMsg';
+import { validateEmail, validateNumber, validatePassword } from '../../utils/Validator';
+
 const Signup: React.FC<SignupInterface> = props => {
   const {language, AddSignUpData} = AuthStore();
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
@@ -35,6 +38,53 @@ const Signup: React.FC<SignupInterface> = props => {
   const [show, setShow] = useState(false);
 
   const handleSignIn = () => {
+    if (!userName) {
+      ToastMsg('Please enter User Name', 'bottom');
+      return false;
+    }
+    if (!email) {
+      ToastMsg('Please enter email', 'bottom');
+      return false;
+    }
+    if (!validateEmail(email)) {
+      ToastMsg('Please enter valid email', 'bottom');
+      return false;
+    }
+    if (!mobileNo) {
+      ToastMsg('Please enter Mobile Number', 'bottom');
+      return false;
+    }
+    if (!validateNumber(mobileNo)) {
+      ToastMsg('Please enter valid Mobile Number', 'bottom');
+      return false;
+    }
+    if (!dob) {
+      ToastMsg('Please enter dob', 'bottom');
+      return false;
+    }
+    
+   
+    if (!password) {
+      ToastMsg('Please enter password', 'bottom');
+      return false;
+    }
+    if (!validatePassword(password)) {
+      ToastMsg('Password must be 8+ chars, 1 uppercase, 1 special char.', 'bottom');
+      return false;
+    }
+    if (!confirmPassword) {
+      ToastMsg('Please enter confirmPassword', 'bottom');
+      return false;
+    }
+
+    if (confirmPassword != password) {
+      ToastMsg('password and confirmPassword are diffrent', 'bottom');
+      return false;
+    }
+    if (!selectedGender) {
+      ToastMsg('Please select Gender', 'bottom');
+      return false;
+    }
     const data = {
       password: password,
       fullName: userName,

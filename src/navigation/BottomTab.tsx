@@ -1,14 +1,20 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './HomeStack';
-import SearchDoctor from '../screens/SearchDoctor/SearchDoctor';
 import AppointmentStack from './AppointmentStack';
 import PrescriptionStack from './PrescriptionStack';
 import SearchStack from './SearchStack';
-import {Image, Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {IMAGES} from '../assets';
 import {
   horizontalScale,
+  radiusScale,
   screenWidth,
   verticalScale,
 } from '../utils/DimensionConstant';
@@ -16,20 +22,13 @@ import {Colors} from '../utils/Constants';
 import ChatStack from './ChatStack';
 
 const Tab = createBottomTabNavigator();
-const CustomTabButton = ({ children, onPress }: any) => (
-    <TouchableOpacity style={styles.customButton} onPress={onPress}>
-      <View style={styles.innerButton}>{children}</View>
-    </TouchableOpacity>
-  );
+
 const BottomTab = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
-          let iconStyle = focused
-            ? {height: verticalScale(25), width: horizontalScale(25)}
-            : {height: verticalScale(25), width: horizontalScale(25)};
 
           if (route.name === 'Home') {
             iconName = focused ? IMAGES.homeFocused : IMAGES.homeUnFocused;
@@ -49,20 +48,26 @@ const BottomTab = () => {
               resizeMode="contain"
               style={
                 route.name === 'Search'
-                  ? {height: verticalScale(95), width: horizontalScale(95),marginBottom:20}
-                  : {...iconStyle}
+                  ? {
+                      height: verticalScale(95),
+                      width: horizontalScale(95),
+                      marginBottom: 20,
+                    }
+                  : styles.iconStyle
               }
               source={iconName}
             />
           );
         },
         tabBarStyle: {
-            position: 'absolute',
-            height: 70,
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-            backgroundColor: '#fff',
-          },
+          position: 'absolute',
+          height: verticalScale(70),
+          // borderTopLeftRadius: 30,
+          // borderTopRightRadius: 30,
+          borderRadius: radiusScale(12),
+          backgroundColor:Colors.white,
+          marginBottom: verticalScale(5),
+        },
         tabBarShowLabel: false,
         headerShown: false,
         tabBarActiveTintColor: 'red',
@@ -78,24 +83,28 @@ const BottomTab = () => {
 };
 export default BottomTab;
 const styles = StyleSheet.create({
-    screen: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    customButton: {
-      top: -30,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    innerButton: {
-      width: 70,
-      height: 70,
-      borderRadius: 35,
-      backgroundColor: '#6200ea',
-      justifyContent: 'center',
-      alignItems: 'center',
-      elevation: 5,
+  screen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  customButton: {
+    top: -30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  innerButton: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: '#6200ea',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+  },
+  iconStyle: {
+    height: verticalScale(25),
+     width: horizontalScale(25),
+     marginTop:verticalScale(25)
     },
 });
-

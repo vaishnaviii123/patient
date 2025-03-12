@@ -18,13 +18,21 @@ import {OtpVerificationInterface} from './OtpVerificationInterface';
 import CountdownTimer from '../../Component/CountdownTimer';
 import AuthStore from '../../zustand/store/AuthStore';
 import LanguageSelected from '../../utils/LanguageSelected';
+import Loader from '../../Component/Loader';
+import {ToastMsg} from '../../Component/ToastMsg';
 const MobileVerification: React.FC<OtpVerificationInterface> = props => {
-  const {language, signUpData, sentNumberOtp} = AuthStore();
+  const {
+    language,
+    signUpData,
+    loading,
+
+    sentNumberOtp,
+    verifyNumberOtp,
+  } = AuthStore();
   console.log('signup', signUpData);
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
   const styles = MobileVerificationStyle();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
   const [show, setShow] = useState(false);
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timerKey, setTimerKey] = useState(0);
@@ -32,14 +40,21 @@ const MobileVerification: React.FC<OtpVerificationInterface> = props => {
 
   const inputs = useRef<(TextInput | null)[]>([]);
   const handleSignIn = () => {
-    // Handle sign in logic here
-    setShow(true);
-  };
-  useEffect(()=>{
-    if(signUpData.mobileNo){
-    sentNumberOtp(signUpData.mobileNo)
+    // setShow(true);
+    const data = {
+      mobileNumber: signUpData.mobileNo,
+      otp: otp.join(''),
+    };
+    if (data) {
+      verifyNumberOtp(data);
     }
-  },[])
+  };
+  useEffect(() => {
+    if (signUpData.mobileNo) {
+      sentNumberOtp(signUpData.mobileNo);
+    }
+  }, []);
+
   const handleChange = (text: string, index: number) => {
     const newOtp = [...otp];
     newOtp[index] = text;
@@ -82,7 +97,7 @@ const MobileVerification: React.FC<OtpVerificationInterface> = props => {
               {LanguageSelected.enterOtpCode[languageKey]}
             </Text>
           </View>
-          <Text style={styles.textregister1}>9045678901</Text>
+          <Text style={styles.textregister1}>{signUpData.mobileNo}</Text>
           <View style={styles.otpContainer}>
             {otp.map((digit, index) => (
               <TextInput
@@ -120,6 +135,7 @@ const MobileVerification: React.FC<OtpVerificationInterface> = props => {
           />
         </KeyboardAwareScrollView>
       </View>
+      {loading && <Loader />}
       {show && <CongratulationScreen text={'SignUp Successful'} />}
     </ImageBackground>
   );
