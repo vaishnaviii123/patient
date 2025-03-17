@@ -91,6 +91,11 @@ const styles = StyleSheet.create({
     height: verticalScale(18),
     marginRight: horizontalMarginScale(10),
   },
+  mailIcon:{
+    width: horizontalScale(17),
+    height: verticalScale(15),
+    marginRight: horizontalMarginScale(10),
+  },
   inputTxt: {
     width: horizontalScale(120),
     height: verticalScale(50),

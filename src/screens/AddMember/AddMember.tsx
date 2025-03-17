@@ -50,7 +50,11 @@ const AddMember: React.FC<AddMemberInterface> = ({navigation}) => {
                   styles.subContainer,
                   focusedField === 'firstName' && styles.selectedContainer,
                 ]}>
-                <Image source={IMAGES.blueProfileIcon} style={styles.icon} />
+                <Image
+                  source={IMAGES.blueProfileIcon}
+                  style={styles.icon}
+                  resizeMode="contain"
+                />
                 <TextInput
                   value={firstName}
                   onChangeText={setFirstName}
@@ -71,7 +75,11 @@ const AddMember: React.FC<AddMemberInterface> = ({navigation}) => {
                   styles.subContainer,
                   focusedField === 'lastName' && styles.selectedContainer,
                 ]}>
-                <Image source={IMAGES.blackProfileIcon} style={styles.icon} />
+                <Image
+                  source={IMAGES.blackProfileIcon}
+                  style={styles.icon}
+                  resizeMode="contain"
+                />
                 <TextInput
                   value={lastName}
                   onChangeText={setLastName}
@@ -127,7 +135,7 @@ const AddMember: React.FC<AddMemberInterface> = ({navigation}) => {
                         styles.genderTxt,
                         gender === 'Female' && styles.selectedGenderTxt,
                       ]}>
-                      Female
+                      {LanguageSelected.female[languageKey]}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -147,7 +155,7 @@ const AddMember: React.FC<AddMemberInterface> = ({navigation}) => {
                         styles.genderTxt,
                         gender === 'Male' && styles.selectedGenderTxt,
                       ]}>
-                      Male
+                      {LanguageSelected.male[languageKey]}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -167,7 +175,7 @@ const AddMember: React.FC<AddMemberInterface> = ({navigation}) => {
                         styles.genderTxt,
                         gender === 'Other' && styles.selectedGenderTxt,
                       ]}>
-                      Other
+                      {LanguageSelected.other[languageKey]}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -180,7 +188,11 @@ const AddMember: React.FC<AddMemberInterface> = ({navigation}) => {
                   styles.subContainer,
                   focusedField === 'email' && styles.selectedContainer,
                 ]}>
-                <Image source={IMAGES.mailIcon} style={styles.icon} />
+                <Image
+                  source={IMAGES.mailIcon}
+                  style={styles.mailIcon}
+                  resizeMode="contain"
+                />
                 <TextInput
                   value={email}
                   onChangeText={setEmail}
@@ -201,7 +213,11 @@ const AddMember: React.FC<AddMemberInterface> = ({navigation}) => {
                   styles.subContainer,
                   focusedField === 'address' && styles.selectedContainer,
                 ]}>
-                <Image source={IMAGES.blackProfileIcon} style={styles.icon} />
+                <Image
+                  source={IMAGES.blackLocationIcon}
+                  style={styles.icon}
+                  resizeMode="contain"
+                />
                 <TextInput
                   value={address}
                   onChangeText={setAddress}

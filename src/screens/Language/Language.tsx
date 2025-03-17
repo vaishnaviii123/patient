@@ -5,9 +5,7 @@ import {
   Text,
   ImageBackground,
   TouchableOpacity,
-  
   Image,
-  
 } from 'react-native';
 
 import {IMAGES} from '../../assets';
