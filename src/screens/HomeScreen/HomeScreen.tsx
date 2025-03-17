@@ -98,8 +98,8 @@ const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
         <View style={styles.header}>
           <View style={styles.leftView}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('DrawerNavigation')}
-              // onPress={() => navigation.openDrawer()}
+              // onPress={() => navigation.navigate('DrawerNavigation')}
+              onPress={() => navigation.openDrawer()}
               >
               <Image
                 source={IMAGES.profile}

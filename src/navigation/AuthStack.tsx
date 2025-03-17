@@ -10,7 +10,7 @@ import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import Language from '../screens/Language/Language';
 import BottomTab from './BottomTab';
 import AuthStore from '../zustand/store/AuthStore';
-
+import DrawerNavigation from './DrawerNavigation';
 // const Token=false
 const Stack = createStackNavigator();
 
@@ -67,7 +67,7 @@ const AuthStack: React.FC = () => {
         <>
           <Stack.Screen
             name="HomeScreen"
-            component={BottomTab}
+            component={DrawerNavigation}
             options={{headerShown: false}}
           />
         </>

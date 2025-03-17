@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Image,
   StyleSheet,
@@ -16,10 +17,10 @@ import MyLocation from '../screens/MyLocation/MyLocation';
 import MyRating from '../screens/MyRating/MyRating';
 import Payments from '../screens/Payments/Payments';
 import Notification from '../screens/Notification/Notification';
-import Language from '../screens/MyLanguage/MyLanguage';
-import Security from '../screens/Security/Security';
+import Language from '../screens/Language/Language';
 import Logout from '../screens/Logout/Logout';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import EditProfile from '../screens/EditProfile/EditProfile';
 import {IMAGES} from '../assets';
 import {
   fontScale,
@@ -30,25 +31,33 @@ import {
   verticalScale,
 } from '../utils/DimensionConstant';
 import {Fonts} from '../utils/Constants';
-
+import BottomTab from './BottomTab';
 const Drawer = createDrawerNavigator();
 
-const customDrawerContent = props => {
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
+
+const customDrawerContent = (props: DrawerContentComponentProps) => {
   return (
     <DrawerContentScrollView
       {...props}
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.drawerContainer}>
       <View style={styles.profileContainer}>
-        <Image source={IMAGES.userProfile} style={styles.profileImage} resizeMode='contain'/>
+        <Image
+          source={IMAGES.userProfile}
+          style={styles.profileImage}
+          resizeMode="contain"
+        />
         <TouchableOpacity style={styles.editIconContainer}>
-          <Image source={IMAGES.whitePencilIcon} style={styles.editIcon} resizeMode='contain'/>
+          <Image
+            source={IMAGES.whitePencilIcon}
+            style={styles.editIcon}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
-        <DrawerItemList {...props} />
-      </ScrollView>
-
+      <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
 };
@@ -57,16 +66,26 @@ const DrawerNavigation = () => {
   return (
     <Drawer.Navigator drawerContent={customDrawerContent}>
       <Drawer.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="Home"
+        component={BottomTab}
         options={{
-          // headerShown: false,
-          drawerLabel: 'Home Screen',
+          headerShown: false,
+          drawerLabel: 'Home',
           drawerLabelStyle: styles.label,
+          drawerIcon: () => (
+            <View style={styles.iconContainer}>
+              <Image
+                resizeMode="contain"
+                source={IMAGES.myProfileIcon}
+                style={styles.icon}
+              />
+            </View>
+          ),
         }}
       />
+
       <Drawer.Screen
-        name="MyAccount"
+        name="MyAccout"
         component={MyAccount}
         options={{
           headerShown: false,
@@ -192,6 +211,24 @@ const DrawerNavigation = () => {
         }}
       />
       <Drawer.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={{
+          headerShown: false,
+          drawerLabel: '',
+          drawerLabelStyle: styles.label,
+          drawerIcon: () => (
+            <View style={styles.iconContainer}>
+              <Image
+                resizeMode="contain"
+                source={IMAGES.myProfileIcon}
+                style={styles.icon}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Drawer.Screen
         name="Logout"
         component={Logout}
         options={{
@@ -218,33 +255,35 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   profileContainer: {
-    height:verticalScale(104.83),
-    width:horizontalScale(117.14),
-    marginTop: verticalMarginScale(75),
-    marginLeft: horizontalMarginScale(30),
-    marginBottom:verticalMarginScale(50),
-    flexDirection:'row',
-    alignItems:'flex-end',
-    justifyContent:'center',
-    // backgroundColor:'red',
+    // height:verticalScale(104.83),
+    // width:horizontalScale(117.14),
+    marginTop: verticalMarginScale(25),
+    // marginLeft: horizontalMarginScale(30),
+    marginBottom: verticalMarginScale(25),
+    // flexDirection:'row',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   profileImage: {
-    height:verticalScale(87.61),
-    width:horizontalScale(87.61),
+    height: verticalScale(87.61),
+    width: horizontalScale(87.61),
     // borderWidth: 3,
     // borderColor: '#0099FF',
   },
-  editIconContainer:{
-    height:verticalScale(32),
-    width:horizontalScale(32),
-    backgroundColor:'#0099FF',
-    borderRadius:radiusScale(50),
-    alignItems:'center',
-    justifyContent:'center',
+  editIconContainer: {
+    height: verticalScale(32),
+    width: horizontalScale(32),
+    backgroundColor: '#0099FF',
+    borderRadius: radiusScale(50),
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    left: horizontalScale(60),
+    bottom: 0,
   },
-  editIcon:{
-    height:verticalScale(13.24),
-    width:horizontalScale(13.24),
+  editIcon: {
+    height: verticalScale(13.24),
+    width: horizontalScale(13.24),
   },
   label: {
     color: '#434343',

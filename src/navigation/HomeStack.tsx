@@ -12,11 +12,11 @@ const HomeStack: React.FC = () => {
         component={HomeScreen}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="DrawerNavigation"
         component={DrawerNavigation}
         options={{headerShown: false}}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };
