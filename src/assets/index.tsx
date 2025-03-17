@@ -142,6 +142,9 @@ export const IMAGES = {
   securityIcon: require('../assets/icon/securityIcon.png'),
   logoutIcon: require('../assets/icon/logoutIcon.png'),
   whitePencilIcon: require('../assets/icon/pencil.png'),
+  walletIcon:require('../assets/icon/wallet-arrow1.png'),
+  blackLocationIcon:require('../assets/icon/Frame(2).png'),
   eyeOpen: require('../assets/icon/eyeOpen.png'),
   eyeClose: require('../assets/icon/eyeClose.png'),
+  cameraIcon: require('../assets/icon/camera.png'),
 };

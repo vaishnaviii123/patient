@@ -26,10 +26,58 @@ const MyAccount: React.FC<MyAccountInterface> = ({navigation}) => {
               <Image source={IMAGES.backIcon} style={styles.backIcon} />
             </TouchableOpacity>
             <Text style={styles.headerTxt}>My Account</Text>
-            <Text />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('EditProfile')}>
+              <Image
+                source={IMAGES.whitePencilIcon}
+                style={styles.pencilIcon}
+              />
+            </TouchableOpacity>
           </View>
 
-          <View style={styles.Container}></View>
+          <View style={styles.Container}>
+            <Image
+              source={IMAGES.userProfile}
+              style={styles.img}
+              resizeMode="contain"
+            />
+            <Text style={styles.header1}>Basic Details</Text>
+
+            <View style={styles.subContainer}>
+              <Text style={styles.subHead}>Full Name</Text>
+              <Text style={styles.txt}>Isha Khare</Text>
+            </View>
+
+            <View style={styles.subContainer}>
+              <Text style={styles.subHead}>Password</Text>
+              <Text style={styles.txt}>Test@123</Text>
+            </View>
+
+            <View style={styles.subContainer}>
+              <Text style={styles.subHead}>Gender</Text>
+              <Text style={styles.txt}>Female</Text>
+            </View>
+
+            <View style={[styles.subContainer, styles.dobContainer]}>
+              <View>
+                <Text style={styles.subHead}>Date Of Birth</Text>
+                <Text style={styles.txt}>10 November 2002</Text>
+              </View>
+              <Image source={IMAGES.calendarIcon} style={styles.calendarIcon} />
+            </View>
+
+            <Text style={styles.header1}>Contact Details</Text>
+
+            <View style={styles.subContainer}>
+              <Text style={styles.subHead}>Mobile Number</Text>
+              <Text style={styles.txt}>+91-7611161040</Text>
+            </View>
+
+            <View style={styles.subContainer}>
+              <Text style={styles.subHead}>Email Address</Text>
+              <Text style={styles.txt}>isha@mailinator.com</Text>
+            </View>
+          </View>
         </ScrollView>
       </ImageBackground>
     </View>

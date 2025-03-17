@@ -113,7 +113,7 @@ const AppointmentDetail: React.FC<AppointmentDetailInterface> = ({
                     {LanguageSelected.amountPayable[languageKey]}
                   </Text>
                 </View>
-                <Image source={IMAGES.selfEmptyIcon} style={styles.Icon} />
+                <Image source={IMAGES.walletIcon} style={styles.Icon} resizeMode='contain'/>
               </View>
             </View>
           </View>

@@ -43,23 +43,36 @@ const styles = StyleSheet.create({
     borderTopRightRadius: radiusScale(40),
     paddingHorizontal: horizontalScale(25),
     paddingVertical: verticalScale(25),
-    height: verticalScale(830),
+    height: verticalScale(1000),
   },
   img: {
     height: verticalScale(100),
     width: horizontalScale(100),
     alignSelf: 'center',
-    marginBottom: 10,
+    // marginBottom: 10,
+  },
+  imageview: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginVertical: verticalMarginScale(20),
+  },
+  camera: {
+    height: verticalScale(35),
+    width: horizontalScale(35),
+  },
+  cameraView: {
+    position: 'absolute',
+    right: '40%',
+    top: '10%',
   },
   header1: {
     fontFamily: Fonts.Bold,
     fontSize: fontScale(18),
     color: '#595959',
-    marginVertical: verticalMarginScale(10),
+    marginTop: verticalMarginScale(15),
   },
   subContainer: {
-    height: verticalScale(70),
-    marginBottom: verticalMarginScale(13),
+    height: verticalScale(55),
     borderRadius: radiusScale(10),
     backgroundColor: '#CEEBFF',
     paddingHorizontal: horizontalScale(15),
@@ -69,8 +82,11 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Bold,
     fontSize: fontScale(14),
     color: '#090909',
+    marginTop: verticalMarginScale(15),
+    marginBottom: verticalMarginScale(5),
   },
   txt: {
+    height: verticalScale(55),
     fontFamily: Fonts.SemiBold,
     fontSize: fontScale(14),
     color: '#000000',
@@ -83,6 +99,29 @@ const styles = StyleSheet.create({
   calendarIcon: {
     height: verticalScale(20),
     width: horizontalScale(20),
+  },
+  fixedButtonContainer: {
+    width: horizontalScale(350),
+    height: verticalScale(66),
+    position: 'absolute',
+    left: 18,
+    top: 648,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0099FF',
+    paddingVertical: verticalScale(8),
+    borderRadius: radiusScale(16),
+  },
+  fixedButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  getAppointmentText: {
+    fontFamily: Fonts.Bold,
+    fontSize: fontScale(18),
+    color: '#FFFFFF',
   },
 });
 export default styles;
