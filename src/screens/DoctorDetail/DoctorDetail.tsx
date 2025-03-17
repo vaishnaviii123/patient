@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Text,
@@ -33,6 +33,7 @@ const users = [
 const DoctorDetail: React.FC<DoctorDetailInterface> = props => {
   const {language} = AuthStore();
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
+  const [fees, setFees] = useState('50.9');
 
   const renderUsersRating = ({item}: {item: any}) => (
     <View>
@@ -228,7 +229,7 @@ const DoctorDetail: React.FC<DoctorDetailInterface> = props => {
         </ScrollView>
         <View style={styles.fixedButtonContainer}>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('QuestionScreen')}>
+            onPress={() => props.navigation.navigate('QuestionScreen', {fees})}>
             <View style={styles.innerContainer}>
               <View style={styles.rightArrowContainer}>
                 <Image source={IMAGES.rightArrow} style={styles.rightArrow} />

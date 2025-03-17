@@ -269,6 +269,7 @@ const LanguageSelected = {
     AR: 'وصفتي الطبية',
     FN: 'Mon Ordonnance',
   },
+  //ClinicDetail
   clinicDetail: {
     EN: 'Clinic Detail',
     AR: 'تفاصيل العيادة',
@@ -304,6 +305,7 @@ const LanguageSelected = {
     AR: 'التقييم',
     FN: 'Évaluation',
   },
+  //DoctorDetail
   doctorDetail: {
     EN: 'Doctor Detail',
     AR: 'تفاصيل الطبيب',
@@ -364,7 +366,7 @@ const LanguageSelected = {
     AR: 'احجز الآن',
     FN: 'Réservez maintenant',
   },
-
+  //QuestionScreen
   bookAnAppoinment: {
     EN: 'Book an Appointment',
     AR: 'حجز موعد',
@@ -390,6 +392,7 @@ const LanguageSelected = {
     AR: 'التالي',
     FN: 'Suivant',
   },
+  //GetAppointment
   getAppointment: {
     EN: 'Get Appointment',
     AR: 'احجز موعدًا',
@@ -460,16 +463,114 @@ const LanguageSelected = {
     AR: 'هل تريد',
     FN: 'Voulez-vous',
   },
-  uploadPrescription: {
+  uploadPrescriptionQ: {
     EN: 'Upload Prescription ?',
     AR: 'تحميل الوصفة الطبية؟',
     FN: 'Télécharger une ordonnance ?',
+  },
+  uploadPrescription: {
+    EN: 'Upload Prescription',
+    AR: 'تحميل الوصفة الطبية',
+    FN: 'Télécharger une ordonnance',
+  },
+  upload: {
+    EN: 'Upload',
+    AR: 'تحميل',
+    FN: 'Téléverser',
+  },
+  selectMember: {
+    EN: 'Select Member',
+    AR: 'اختر عضو',
+    FN: 'Sélectionner un membre',
+  },
+  addNewMember: {
+    EN: 'Add New Member',
+    AR: 'إضافة عضو جديد',
+    FN: 'Ajouter un nouveau membre',
   },
   // searchDoctorScreen
   search: {
     EN: 'Search',
     AR: 'بحث',
     FN: 'Recherche',
+  },
+  //AppointmentDetail
+  appointmentDetail: {
+    EN: 'Appointment Detail',
+    AR: 'تفاصيل الموعد',
+    FN: 'Détail du rendez-vous',
+  },
+  appointmentDetails: {
+    EN: 'Appointment Details',
+    AR: 'تفاصيل الموعد',
+    FN: 'Détails du rendez-vous',
+  },
+  appointmentFor: {
+    EN: 'Appointment For',
+    AR: 'موعد لـ',
+    FN: 'Rendez-vous pour',
+  },
+  appointmentDate: {
+    EN: 'Appointment Date',
+    AR: 'تاريخ الموعد',
+    FN: 'Date de rendez-vous',
+  },
+  appointmentTime: {
+    EN: 'Appointment Time',
+    AR: 'وقت الموعد',
+    FN: 'Heure du rendez-vous',
+  },
+  appointmentTypeAndMode: {
+    EN: 'Appointment Type & Mode',
+    AR: 'نوع ووسيلة الموعد',
+    FN: 'Type et mode de rendez-vous',
+  },
+  amountPayable: {
+    EN: 'Amount Payable',
+    AR: 'المبلغ المستحق',
+    FN: 'Montant à payer',
+  },
+  proceedPayment: {
+    EN: 'Proceed Payment',
+    AR: 'متابعة الدفع',
+    FN: 'Procéder au paiement',
+  },
+  //Add Member
+  addMember: {
+    EN: 'Add Member',
+    AR: 'إضافة عضو',
+    FN: 'Ajouter un membre',
+  },
+  firstName: {
+    EN: 'First Name',
+    AR: 'الاسم الأول',
+    FN: 'Prénom',
+  },
+  lastName: {
+    EN: 'Last Name',
+    AR: 'الاسم الأخير',
+    FN: 'Nom de famille',
+  },
+  selectAge: {
+    EN: 'Select Age',
+    AR: 'اختر العمر',
+    FN: "Sélectionner l'âge",
+  },
+  //forgot password
+  forgotpassword: {
+    EN: 'Forgot Password',
+    AR: 'نسيت كلمة المرور',
+    FN: 'Mot de passe oublié',
+  },
+  GetLink: {
+    EN: 'Get Link',
+    AR: 'احصل على الرابط',
+    FN: 'Obtenir le lien',
+  },
+  fullLine: {
+    EN: 'We Will Send Reset password Link to Your Registered Email Address Open That Link And You Will Redirect to Reset Password Screen',
+    AR: 'سوف نرسل رابط إعادة تعيين كلمة المرور إلى عنوان بريدك الإلكتروني المسجل افتح هذا الرابط وستتم إعادة توجيهك إلى شاشة إعادة تعيين كلمة المرور',
+    FN: "Nous enverrons un lien de réinitialisation du mot de passe à votre adresse e-mail enregistrée Ouvrez ce lien et vous serez redirigé vers l'écran de réinitialisation du mot de passe",
   },
 };
 

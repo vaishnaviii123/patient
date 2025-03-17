@@ -24,10 +24,10 @@ export const Colors = {
   fontColor: '#2A2A37',
   lightblue: '#0099FF',
   extralightblue: '#CEEBFF',
-  whitegrey:"#F1F1F1",
-  borderColor:"#C6D3E7",
-  backGround:"#EDF8FF",
-  greenlight:"#2BBB4B"
+  whitegrey: '#F1F1F1',
+  borderColor: '#C6D3E7',
+  backGround: '#EDF8FF',
+  greenlight: '#2BBB4B',
 };
 
 export const Fonts = {
@@ -40,6 +40,4 @@ export const Fonts = {
 export const backarrowStyle = {
   width: verticalScale(40),
   height: verticalScale(40),
-
- 
 };

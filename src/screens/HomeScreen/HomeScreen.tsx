@@ -19,7 +19,7 @@ import styles from './HomeScreenStyle';
 const {width} = Dimensions.get('window');
 const CARD_WIDTH = width * 0.75; // 75% of screen width for card
 const SPACING = 15;
-const HomeScreen: React.FC<HomeScreenInterface> = props => {
+const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
   const {language} = AuthStore();
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
 
@@ -53,7 +53,7 @@ const HomeScreen: React.FC<HomeScreenInterface> = props => {
   const renderUpcomingAppointments = ({item}: {item: any}) => (
     <TouchableOpacity
       style={styles.eventContainer}
-      onPress={() => props.navigation.navigate('Appointment')}>
+      onPress={() => navigation.navigate('Appointment')}>
       <ImageBackground source={IMAGES.vector} resizeMode="cover">
         <View style={styles.top}>
           <Text style={styles.topText}>
@@ -98,7 +98,9 @@ const HomeScreen: React.FC<HomeScreenInterface> = props => {
         <View style={styles.header}>
           <View style={styles.leftView}>
             <TouchableOpacity
-              onPress={() => props.navigation.navigate('SearchDoctor')}>
+              onPress={() => navigation.navigate('DrawerNavigation')}
+              // onPress={() => navigation.openDrawer()}
+              >
               <Image
                 source={IMAGES.profile}
                 style={styles.leftImg}
@@ -107,14 +109,10 @@ const HomeScreen: React.FC<HomeScreenInterface> = props => {
             </TouchableOpacity>
           </View>
           <View style={styles.rightView}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('MyChat')}>
-              <Image source={IMAGES.wallet} style={styles.rightImg} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('MyPrescription')}>
-              <Image source={IMAGES.bell} style={styles.rightImg} />
-            </TouchableOpacity>
+            <Image source={IMAGES.wallet} style={styles.rightImg} />
+
+            <Image source={IMAGES.bell} style={styles.rightImg} />
+
             <View style={styles.dropdown}>
               <Image source={IMAGES.flag} style={styles.dropdownImg} />
               {/* <Image source={IMAGES.dropdown} style={styles.rightImg} /> */}

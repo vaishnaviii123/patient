@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   Container: {
     position: 'relative',
-    height: verticalScale(500),
+    height: verticalScale(600),
     marginTop: verticalMarginScale(10),
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: radiusScale(40),
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: verticalMarginScale(60),
-    // marginTop: 20,
+    // marginBottom: verticalMarginScale(2000),
   },
   backButton: {
     height: verticalScale(52.38),
