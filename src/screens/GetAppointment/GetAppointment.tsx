@@ -92,8 +92,13 @@ const getTimePeriod = (time: any) => {
   return hour < 12 ? 'morning' : 'afternoon';
 };
 
-const GetAppointment: React.FC<GetAppointmentInterface> = props => {
-  const [modalVisible, setModalVisible] = useState(false);
+const GetAppointment: React.FC<GetAppointmentInterface> = ({
+  navigation,
+  route,
+}) => {
+  const {fees} = route.params;
+  const [uploadModalVisible, setUploadModalVisible] = useState(false);
+  const [familyModalVisible, setFamilyModalVisible] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedType, setSelectedType] = useState('Online');
   const [selectedMode, setSelectedMode] = useState('Video');
@@ -158,12 +163,17 @@ const GetAppointment: React.FC<GetAppointmentInterface> = props => {
     }
   };
 
+  const handleFamily = () => {
+    setFamilyModalVisible(true);
+    setSelectedPerson('Family');
+  };
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground resizeMode="cover" source={IMAGES.bg}>
         <ScrollView>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image source={IMAGES.backIcon} style={styles.backIcon} />
             </TouchableOpacity>
             <Text style={styles.headerTxt}>
@@ -505,7 +515,7 @@ const GetAppointment: React.FC<GetAppointmentInterface> = props => {
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setSelectedPerson('Family')}>
+              <TouchableOpacity onPress={handleFamily}>
                 <View
                   style={[
                     styles.tab,
@@ -527,41 +537,63 @@ const GetAppointment: React.FC<GetAppointmentInterface> = props => {
               </TouchableOpacity>
             </View>
             <View style={styles.uploadContainer}>
-              <TouchableOpacity onPress={() => setModalVisible(true)}>
-                <Text style={styles.questionTxt}>
-                  {LanguageSelected.doYouWantTo[languageKey]}{' '}
-                  <Text style={styles.linkTxt}>
-                    {LanguageSelected.uploadPrescription[languageKey]}
-                  </Text>
+              <Text style={styles.questionTxt}>
+                {LanguageSelected.doYouWantTo[languageKey]}{' '}
+              </Text>
+              <TouchableOpacity onPress={() => setUploadModalVisible(true)}>
+                <Text style={styles.linkTxt}>
+                  {LanguageSelected.uploadPrescriptionQ[languageKey]}
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
+        <View style={styles.fixedButtonContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('AppointmentDetail', {
+                selectedType,
+                selectedMode,
+                selectedPerson,
+                time,
+                date,
+                fees,
+              })
+            }
+            style={styles.fixedButton}>
+            <Text style={styles.getAppointmentText}>
+              {LanguageSelected.getAppointment[languageKey]}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
 
       <Modal
-        visible={modalVisible}
+        visible={uploadModalVisible}
         animationType="slide"
         transparent={true}
-        onRequestClose={() => setModalVisible(false)}>
+        onRequestClose={() => setUploadModalVisible(false)}>
         <View style={styles.modalOverlay}>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <TouchableOpacity onPress={() => setUploadModalVisible(false)}>
             <Image
               source={IMAGES.crossIcon}
               style={styles.crossIcon}
               resizeMode="contain"
             />
           </TouchableOpacity>
-          <View style={[styles.Container, {width: horizontalScale(400)}]}>
-            <Text style={styles.uploadHead}>Upload Prescription</Text>
+          <View style={[styles.Container, {width: horizontalScale(385)}]}>
+            <Text style={styles.uploadHead}>
+              {LanguageSelected.uploadPrescription[languageKey]}
+            </Text>
             <TouchableOpacity onPress={pickFile} style={styles.subContainer1}>
               {selectedFile ? (
-                <Text>{selectedFile.name}</Text>
+                <Text>{selectedFile?.name}</Text>
               ) : (
                 <>
                   <Image source={IMAGES.uploadIcon} style={styles.uploadIcon} />
-                  <Text style={styles.uploadTxt}>Upload Prescription</Text>
+                  <Text style={styles.uploadTxt}>
+                    {LanguageSelected.uploadPrescription[languageKey]}
+                  </Text>
                 </>
               )}
             </TouchableOpacity>
@@ -572,7 +604,66 @@ const GetAppointment: React.FC<GetAppointmentInterface> = props => {
                   ? () => Alert.alert('Uploaded Successfully')
                   : () => Alert.alert('No File Selected')
               }>
-              <Text style={styles.uploadText}>Upload</Text>
+              <Text style={styles.uploadText}>
+                {LanguageSelected.upload[languageKey]}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        visible={familyModalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setFamilyModalVisible(false)}>
+        <View style={styles.modalOverlay}>
+          <TouchableOpacity onPress={() => setFamilyModalVisible(false)}>
+            <Image
+              source={IMAGES.crossIcon}
+              style={styles.crossIcon}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+          <View style={[styles.Container, {width: horizontalScale(385)}]}>
+            <Text style={styles.uploadHead}>{LanguageSelected.selectMember[languageKey]}</Text>
+            <View style={styles.subContainer2}>
+              <Image
+                source={IMAGES.memberProfile}
+                style={styles.memberProfile}
+                resizeMode="contain"
+              />
+              <View style={styles.detailsContainer}>
+                <Text style={styles.memberName}>Sandeep Sharma</Text>
+                <Text style={styles.info}>29, Male</Text>
+                <View style={styles.dataContainer}>
+                  <Image
+                    source={IMAGES.blueTelephoneIcon}
+                    style={styles.Icon}
+                    resizeMode="contain"
+                  />
+                  <Text style={styles.info}>9926441129</Text>
+                </View>
+                <View style={styles.dataContainer}>
+                  <Image source={IMAGES.blueLocationIcon} style={styles.Icon} />
+                  <Text style={styles.info}>149 Warwick Rd, Kenilworth</Text>
+                </View>
+              </View>
+              <Image
+                source={IMAGES.pencilIcon}
+                style={styles.pencilIcon}
+                resizeMode="contain"
+              />
+            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('AddMember')}>
+              <View style={styles.bottomContainer}>
+                <Image
+                  source={IMAGES.addMemberIcon}
+                  style={styles.addMemberIcon}
+                  resizeMode="contain"
+                />
+                <Text style={styles.addMemberTxt}>{LanguageSelected.addNewMember[languageKey]}</Text>
+              </View>
             </TouchableOpacity>
           </View>
         </View>

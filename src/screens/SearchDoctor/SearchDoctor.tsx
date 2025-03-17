@@ -143,7 +143,9 @@ const SearchDoctor: React.FC<SearchDoctorInterface> = props => {
           </View>
           <TouchableOpacity
             style={styles.bookNowButton}
-            onPress={() => console.log('Book Now pressed')}>
+            onPress={() =>
+              props.navigation.navigate('QuestionScreen', {fees: 50.9})
+            }>
             <Text style={styles.bookNowButtonText}>Book Now</Text>
             <Image
               resizeMode="contain"
@@ -200,14 +202,16 @@ const SearchDoctor: React.FC<SearchDoctorInterface> = props => {
               source={IMAGES.whitebackArrow}
             />
             <Text style={styles.search}>
-     
               {LanguageSelected.search[languageKey]}
             </Text>
             <View />
           </View>
           <View style={styles.searchBarContainer}>
             <Image source={IMAGES.searchIcon} style={styles.searchIcon} />
-            <TextInput style={styles.searchInput} placeholder={LanguageSelected.search[languageKey]} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder={LanguageSelected.search[languageKey]}
+            />
             <Image source={IMAGES.filterIcon} style={styles.filterIcon} />
           </View>
         </View>

@@ -9,6 +9,7 @@ import MobileVerification from '../screens/OtpVerification/MobileVerification';
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import Language from '../screens/Language/Language';
 import BottomTab from './BottomTab';
+
 const Stack = createStackNavigator();
 
 const AuthStack: React.FC = () => {

@@ -3,8 +3,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SearchDoctor from '../screens/SearchDoctor/SearchDoctor';
 import ClinicDetail from '../screens/ClinicDetail/ClinicDetail';
 import DoctorDetail from '../screens/DoctorDetail/DoctorDetail';
-import QuestionScreen from '../screens/QuestionScreen/QuestionScreen';
 import GetAppointment from '../screens/GetAppointment/GetAppointment';
+import QuestionScreen from '../screens/QuestionScreen/QuestionScreen';
+import AppointmentDetail from '../screens/AppointmentDetail/AppointmentDetail';
+import AddMember from '../screens/AddMember/AddMember';
 const Stack = createStackNavigator();
 
 const SearchStack: React.FC = () => {
@@ -25,6 +27,13 @@ const SearchStack: React.FC = () => {
         component={DoctorDetail}
         options={{headerShown: false}}
       />
+
+      <Stack.Screen
+        name="GetAppointment"
+        component={GetAppointment}
+        options={{headerShown: false}}
+      />
+
       <Stack.Screen
         name="QuestionScreen"
         component={QuestionScreen}
@@ -32,8 +41,14 @@ const SearchStack: React.FC = () => {
       />
 
       <Stack.Screen
-        name="GetAppointment"
-        component={GetAppointment}
+        name="AppointmentDetail"
+        component={AppointmentDetail}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="AddMember"
+        component={AddMember}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

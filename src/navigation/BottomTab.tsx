@@ -65,7 +65,7 @@ const BottomTab = () => {
           // borderTopLeftRadius: 30,
           // borderTopRightRadius: 30,
           borderRadius: radiusScale(12),
-          backgroundColor:Colors.white,
+          backgroundColor: Colors.white,
           marginBottom: verticalScale(5),
         },
         tabBarShowLabel: false,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     height: verticalScale(25),
-     width: horizontalScale(25),
-     marginTop:verticalScale(25)
-    },
+    width: horizontalScale(25),
+    marginTop: verticalScale(25),
+  },
 });

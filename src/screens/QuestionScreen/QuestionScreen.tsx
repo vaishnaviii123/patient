@@ -49,7 +49,11 @@ const questions = [
 
 const TOTAL_QUESTIONS = questions.length;
 
-const QuestionScreen: React.FC<QuestionScreenInterface> = props => {
+const QuestionScreen: React.FC<QuestionScreenInterface> = ({
+  navigation,
+  route,
+}) => {
+  const {fees} = route?.params;
   const {language} = AuthStore();
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
 
@@ -72,7 +76,7 @@ const QuestionScreen: React.FC<QuestionScreenInterface> = props => {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedOption(answers[currentQuestion + 1] || null);
     } else {
-      props.navigation.navigate('GetAppointment', {answers});
+      navigation.navigate('GetAppointment', {answers, fees});
     }
   };
 
@@ -81,7 +85,7 @@ const QuestionScreen: React.FC<QuestionScreenInterface> = props => {
       <ImageBackground resizeMode="cover" source={IMAGES.bg}>
         <ScrollView>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image source={IMAGES.backIcon} style={styles.backIcon} />
             </TouchableOpacity>
             <Text style={styles.headerTxt}>
@@ -154,7 +158,7 @@ const QuestionScreen: React.FC<QuestionScreenInterface> = props => {
                 style={styles.backButton}
                 onPress={() => {
                   if (currentQuestion === 0) {
-                    props.navigation.goBack();
+                    navigation.goBack();
                   } else {
                     setCurrentQuestion(prev => {
                       const prevQuestion = prev - 1;
