@@ -9,59 +9,69 @@ import MobileVerification from '../screens/OtpVerification/MobileVerification';
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import Language from '../screens/Language/Language';
 import BottomTab from './BottomTab';
+import AuthStore from '../zustand/store/AuthStore';
+
+// const Token=false
 const Stack = createStackNavigator();
 
 const AuthStack: React.FC = () => {
+  const {Token} = AuthStore();
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="FirstScreen"
-        component={FirstScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="SecondScreen"
-        component={SecondScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Language"
-        component={Language}
-        options={{headerShown: false}}
-      />
+      {Token == null ? (
+        <>
+          <Stack.Screen
+            name="FirstScreen"
+            component={FirstScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SecondScreen"
+            component={SecondScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Language"
+            component={Language}
+            options={{headerShown: false}}
+          />
 
-      <Stack.Screen
-        name="SignIn"
-        component={SignIn}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{headerShown: false}}
-      />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
 
-      <Stack.Screen
-        name="Signup"
-        component={Signup}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MobileVerification"
-        component={MobileVerification}
-        options={{headerShown: false}}
-      />
-
-      <Stack.Screen
-        name="HomeScreen"
-        component={BottomTab}
-        options={{headerShown: false}}
-      />
+          <Stack.Screen
+            name="Signup"
+            component={Signup}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="MobileVerification"
+            component={MobileVerification}
+            options={{headerShown: false}}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="HomeScreen"
+            component={BottomTab}
+            options={{headerShown: false}}
+          />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

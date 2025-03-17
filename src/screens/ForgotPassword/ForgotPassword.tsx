@@ -18,11 +18,16 @@ import ForgotPasswordStyle from './ForgotPasswordStyle';
 import {ForgotPasswordInterface} from './ForgotPasswordInterface';
 import {backarrowStyle} from '../../utils/Constants';
 import CustomTextInput from '../../Component/CustomTextinput';
+import AuthStore from '../../zustand/store/AuthStore';
+import LanguageSelected from '../../utils/LanguageSelected';
 import {
   verticalMarginScale,
   verticalScale,
 } from '../../utils/DimensionConstant';
+import Loader from '../../Component/Loader';
 const ForgotPassword: React.FC<ForgotPasswordInterface> = props => {
+  const {language, loading, forgotPasswordPetient} = AuthStore();
+  const languageKey = language as keyof typeof LanguageSelected.Medicine;
   const styles = ForgotPasswordStyle();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +36,11 @@ const ForgotPassword: React.FC<ForgotPasswordInterface> = props => {
   const inputs = useRef<(TextInput | null)[]>([]);
   const handleSignIn = () => {
     // Handle sign in logic here
-    setShow(true);
+    const data = {
+      email: email,
+      navigation: props.navigation,
+    };
+    forgotPasswordPetient(data);
   };
   const handleChange = (text: string, index: number) => {
     const newOtp = [...otp];
@@ -61,32 +70,44 @@ const ForgotPassword: React.FC<ForgotPasswordInterface> = props => {
     <ImageBackground source={IMAGES.backgroundLogin} style={styles.mainView}>
       <View style={styles.container1}>
         <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+          <TouchableOpacity onPress={()=>props.navigation.goBack()}>
           <Image
             resizeMode="contain"
             source={IMAGES.backArrow}
             style={[backarrowStyle]}
           />
-          <Text style={styles.logintext}>Forgot Password</Text>
+          </TouchableOpacity>
+          <Text style={styles.logintext}>
+    
+            {LanguageSelected.forgotpassword[languageKey]}
+          </Text>
           <View style={styles.regiterView}>
             <Text style={styles.textregister1}>
-              We Will Send Reset password Link to Your Registered Email Address
-              Open That Link And You Will Redirect to Reset Password Screen
+              {LanguageSelected.fullLine[languageKey]}
             </Text>
           </View>
-          <Text style={styles.textregister1}>Email *</Text>
+          <Text style={styles.textregister1}>
+            {LanguageSelected.email[languageKey]}
+          </Text>
 
           <CustomTextInput
             icon={[IMAGES.focusedprofile, IMAGES.unfocusedprofile]}
-            placeholder="Enter Email"
+            placeholder={LanguageSelected.enterEmail[languageKey]}
             containerStyle={{
               marginVertical: verticalMarginScale(15),
               marginBottom: verticalMarginScale(95),
             }}
+            eyeicon={false}
+            onChangeText={txt => setEmail(txt)}
           />
-          <AppButton title="Get Link" onPress={handleSignIn} />
+          <AppButton
+            title={LanguageSelected.GetLink[languageKey]}
+            disabled={email ? false : true}
+            onPress={handleSignIn}
+          />
         </KeyboardAwareScrollView>
       </View>
-      {show && <CongratulationScreen text={'SignUp Successful'} />}
+      {loading && <Loader />}
     </ImageBackground>
   );
 };

@@ -20,6 +20,7 @@ import AuthStore from '../../zustand/store/AuthStore';
 import LanguageSelected from '../../utils/LanguageSelected';
 import Loader from '../../Component/Loader';
 import {ToastMsg} from '../../Component/ToastMsg';
+import {Colors} from '../../utils/Constants';
 const MobileVerification: React.FC<OtpVerificationInterface> = props => {
   const {
     language,
@@ -44,6 +45,7 @@ const MobileVerification: React.FC<OtpVerificationInterface> = props => {
     const data = {
       mobileNumber: signUpData.mobileNo,
       otp: otp.join(''),
+      navigation: props.navigation
     };
     if (data) {
       verifyNumberOtp(data);
@@ -51,7 +53,11 @@ const MobileVerification: React.FC<OtpVerificationInterface> = props => {
   };
   useEffect(() => {
     if (signUpData.mobileNo) {
-      sentNumberOtp(signUpData.mobileNo);
+      const data = {
+        mobileNo:signUpData.mobileNo,
+        status:"1"
+      };
+      sentNumberOtp(data);
     }
   }, []);
 
@@ -80,11 +86,22 @@ const MobileVerification: React.FC<OtpVerificationInterface> = props => {
   };
   const handleStart = () => {
     console.log('Resend button clicked!');
+
     // Trigger OTP resend API here
+  };
+  const handleResend = () => {
+    setTimeShow(false)
+    restartTimer()
+    const data = {
+      mobileNo:signUpData.mobileNo,
+      status:"2"
+    };
+    sentNumberOtp(data);
   };
   const restartTimer = () => {
     setTimerKey(prevKey => prevKey + 1); // Change key to reset timer
   };
+  console.log('timsgwihjiw', timeShow);
   return (
     <ImageBackground source={IMAGES.OtpBackground} style={styles.mainView}>
       <View style={styles.container1}>
@@ -112,12 +129,25 @@ const MobileVerification: React.FC<OtpVerificationInterface> = props => {
               />
             ))}
           </View>
-          <CountdownTimer
-            key={timerKey}
-            initialTime={60}
-            onStart={handleStart}
-            onFinish={handleFinish}
-          />
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            {timeShow ? (
+              <TouchableOpacity onPress={handleResend}>
+                <Text style={styles.resendText}>
+                  {LanguageSelected.resend[languageKey]}
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <Text style={[styles.resendText, {color: Colors.fontColor}]}>
+                {LanguageSelected.resend[languageKey]}
+              </Text>
+            )}
+            <CountdownTimer
+              key={timerKey}
+              initialTime={60}
+              onStart={handleStart}
+              onFinish={handleFinish}
+            />
+          </View>
           <View style={styles.regiterView}>
             <Text style={styles.textregister1}>
               {LanguageSelected.alreadyHaveAnAccount[languageKey]}

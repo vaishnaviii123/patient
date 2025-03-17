@@ -15,6 +15,7 @@ import {
   verticalMarginScale,
   verticalScale,
 } from '../utils/DimensionConstant';
+import { IMAGES } from '../assets';
 
 interface CustomTextInputProps extends TextInputProps {
   icon?: ImageSourcePropType[]; // Accepts an image for the icon
@@ -22,6 +23,7 @@ interface CustomTextInputProps extends TextInputProps {
   inputStyle?: TextStyle;
   containerStyle?: any; // Custom styling for the TextInput
   onRightIconPress?: () => void;
+  eyeicon:any
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -30,11 +32,13 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   containerStyle,
   Righticon,
   onRightIconPress,
+  eyeicon,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [icon1, setIcon1] = useState(icon ? icon[1] : undefined);
   const [icon0, setIcon0] = useState(icon ? icon[0] : undefined);
+  const [show, setShow] = useState(eyeicon?true:false);
   return (
     <View
       style={[
@@ -53,6 +57,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
       <TextInput
         style={[styles.input, inputStyle]}
         placeholderTextColor={Colors.grey}
+        secureTextEntry={show}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         {...props}
@@ -60,6 +65,12 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
       {Righticon && (
            <TouchableOpacity onPress={onRightIconPress}>
            <Image source={isFocused ? Righticon[0] : Righticon[1]} style={styles.icon} />
+         </TouchableOpacity>
+        //  <Image source={isFocused ? Righticon[0] : Righticon[1]} style={styles.icon} />
+      )}
+      {eyeicon && (
+           <TouchableOpacity onPress={()=>setShow(!show)}>
+           <Image source={show ? IMAGES.eyeOpen : IMAGES.eyeClose} style={styles.icon} />
          </TouchableOpacity>
         //  <Image source={isFocused ? Righticon[0] : Righticon[1]} style={styles.icon} />
       )}

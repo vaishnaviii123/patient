@@ -1,51 +1,107 @@
 import {create} from 'zustand';
-import {devtools} from 'zustand/middleware';
-import {sentOtp, verifyOtp, SignUpPatient} from '../api/AuthApiServices';
+import {devtools, persist} from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  sentOtp,
+  verifyOtp,
+  SignUpPatient,
+  login,
+  forgotPassword,
+} from '../api/AuthApiServices';
 import {ToastMsg} from '../../Component/ToastMsg';
+
 // User State Interface
 interface UserState {
   language: string;
   user: any | null; // Store user data
   loading: boolean; // Loading state
-  error: string | null;
-  signUpData: any; // Error message
+  error: string | null; // Error message
+  signUpData: any;
+  LoginPetientData: any;
+  Token: string | null;
 
-  sentNumberOtp: (mobileNo: string) => void; // Function to fetch user by ID
+  sentNumberOtp: (data: any) => void;
   clearUser: () => void;
-  addlanguage: (data: string) => void; // Clear user data
-  AddSignUpData: (data: any) => void; // Clear user data
+  addlanguage: (data: string) => void;
+  AddSignUpData: (data: any) => void;
   verifyNumberOtp: (data: VerifyOtpData) => void;
-
+  LoginPetient: (data: any) => void;
+  forgotPasswordPetient: (data: any) => void;
 }
 
 interface VerifyOtpData {
   mobileNumber: string;
   otp: string;
+  navigation: any;
 }
 
 // Zustand Store with API Logic
 const AuthStore = create<UserState>()(
-  devtools(
-    (set, get) => ({
+  persist(
+    devtools((set, get) => ({
       loading: false,
       error: null,
       language: 'EN',
       signUpData: null,
+      LoginPetientData: null,
+      Token: null,
 
-      // Fetch User by ID
-      sentNumberOtp: async (mobileNo: string) => {
+      // Send OTP
+      sentNumberOtp: async (data: any) => {
         set({loading: true, error: null});
         try {
-          const userData = await sentOtp(mobileNo);
+          const userData = await sentOtp(data);
           set({loading: false});
           if (userData) {
             ToastMsg(userData.message, 'bottom');
           }
         } catch (error) {
-          set({error: 'Failed to fetch user', loading: false});
+          set({error: 'Failed to send OTP', loading: false});
         }
       },
-      verifyNumberOtp: async (Data: VerifyOtpData, navigation: any) => {
+
+      // Login Patient
+      LoginPetient: async (data: any) => {
+        set({loading: true, error: null});
+        try {
+          const userData = await login(data);
+          if (userData) {
+            set({
+              loading: false,
+              LoginPetientData: userData.data,
+              Token: userData.data.token,
+            });
+            ToastMsg('Login Successful', 'bottom');
+          } else {
+            ToastMsg('Invalid Credentials', 'bottom');
+          }
+        } catch (error) {
+          set({error: 'Failed to login', loading: false});
+        }
+      },
+      forgotPasswordPetient: async (data: any) => {
+        set({loading: true, error: null});
+        const forgotData = {
+          email: data.email,
+          userType: 'Patient',
+        };
+       
+        try {
+          const userData = await forgotPassword(forgotData);
+          if (userData?.status == 200) {
+            set({loading: false});
+            data.navigation.navigate('SignIn');
+            ToastMsg(userData.message, 'bottom');
+          } else {
+            ToastMsg('Invalid Credentials', 'bottom');
+          }
+        } catch (error) {
+          set({error: 'Failed to login', loading: false});
+        }
+      },
+
+      // Verify OTP and Register
+      verifyNumberOtp: async (Data: VerifyOtpData) => {
         set({loading: true, error: null});
         try {
           const userData = await verifyOtp(Data);
@@ -54,28 +110,50 @@ const AuthStore = create<UserState>()(
             const userData = await SignUpPatient(state.signUpData);
             set({loading: false});
             if (userData.status == 200) {
-              navigation.navigate('SignIn');
+              Data.navigation.navigate('SignIn');
+              ToastMsg(userData.message, 'bottom');
             } else {
-              navigation.navigate('Signup');
+              Data.navigation.navigate('Signup');
             }
           }
         } catch (error) {
-          set({error: 'Failed to fetch user', loading: false});
+          set({error: 'Failed to verify OTP', loading: false});
         }
       },
 
-      AddSignUpData: async (data: any) => {
+      // Store Signup Data
+      AddSignUpData: (data: any) => {
         set({signUpData: data});
       },
-      // Create User
-      addlanguage: async (data: string) => {
+
+      // Update Language
+      addlanguage: (data: string) => {
         set({language: data});
       },
 
-      // Clear User
-      clearUser: () => set({user: null}),
-    }),
-    {name: 'UserStore'},
+      // Clear User Data (Logout)
+      clearUser: () =>
+        set({
+          user: null,
+          Token: null,
+          LoginPetientData: null,
+        }),
+    })),
+    {
+      name: 'auth-storage', // AsyncStorage key
+      storage: {
+        getItem: async name => {
+          const item = await AsyncStorage.getItem(name);
+          return item ? JSON.parse(item) : null;
+        },
+        setItem: async (name, value) => {
+          await AsyncStorage.setItem(name, JSON.stringify(value));
+        },
+        removeItem: async name => {
+          await AsyncStorage.removeItem(name);
+        },
+      }, // Use AsyncStorage for persistence
+    },
   ),
 );
 

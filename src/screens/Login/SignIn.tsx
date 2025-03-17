@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   TextInput,
@@ -19,20 +19,35 @@ import {LoginInterface} from './LoginInterface';
 import CongratulationScreen from '../CongratulationScreen/Congratulation';
 import AuthStore from '../../zustand/store/AuthStore';
 import LanguageSelected from '../../utils/LanguageSelected';
+import Loader from '../../Component/Loader';
 const SignIn: React.FC<LoginInterface> = props => {
-  const {language} = AuthStore();
+  const {language, loading, LoginPetient} = AuthStore();
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
 
   const styles = LoginStyle();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [show, setShow] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  useEffect(() => {
+    // Check if email and password are not empty
+    if (email != '' && password != '') {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [email, password]);
 
   const handleSignIn = () => {
     // Handle sign in logic here
     // setShow(true);
-    props.navigation.navigate('HomeScreen');
-
+    // props.navigation.navigate('HomeScreen');
+    const data = {
+      email,
+      password,
+      userType: 'Patient',
+    };
+    LoginPetient(data);
   };
 
   const handleSkipLogin = () => {
@@ -64,6 +79,8 @@ const SignIn: React.FC<LoginInterface> = props => {
             icon={[IMAGES.focusedprofile, IMAGES.unfocusedprofile]}
             containerStyle={styles.inputStyle}
             placeholder={LanguageSelected.enterUserName[languageKey]}
+            onChangeText={txt => setEmail(txt)}
+            eyeicon={false}
           />
           <Text style={styles.logintitle}>
             {LanguageSelected.password[languageKey]}
@@ -72,16 +89,19 @@ const SignIn: React.FC<LoginInterface> = props => {
             icon={[IMAGES.focusedLock, IMAGES.unfocusedlock]}
             containerStyle={styles.inputStyle}
             placeholder={LanguageSelected.enterPassword[languageKey]}
+            onChangeText={txt => setPassword(txt)}
+            eyeicon={true}
           />
           <TouchableOpacity
             onPress={() => props.navigation.navigate('ForgotPassword')}>
             <Text style={styles.forgottitle}>
-              {LanguageSelected.forgetPassword[languageKey]}
+              {LanguageSelected.forgotpassword[languageKey]}
             </Text>
           </TouchableOpacity>
           <AppButton
             title={LanguageSelected.login[languageKey]}
             onPress={handleSignIn}
+            disabled={isButtonDisabled}
           />
           <AppButton
             title={LanguageSelected.skipLogin[languageKey]}
@@ -91,6 +111,7 @@ const SignIn: React.FC<LoginInterface> = props => {
           />
         </KeyboardAwareScrollView>
       </View>
+      {loading && <Loader />}
       {show && (
         <CongratulationScreen
           text={LanguageSelected.loginSuccessful[languageKey]}

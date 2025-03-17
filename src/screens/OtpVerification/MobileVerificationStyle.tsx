@@ -91,6 +91,12 @@ const MobileVerificationStyle = () => {
       fontFamily: Fonts.Medium,
       backgroundColor: Colors.white,
     },
+    resendText: {
+      fontSize: fontScale(16),
+      color: Colors.lightblue,
+      fontFamily: Fonts.Bold,
+      marginRight: 10,
+    },
   });
 };
 export default MobileVerificationStyle;

@@ -20,8 +20,12 @@ import {format} from 'date-fns';
 import CongratulationScreen from '../CongratulationScreen/Congratulation';
 import LanguageSelected from '../../utils/LanguageSelected';
 import AuthStore from '../../zustand/store/AuthStore';
-import { ToastMsg } from '../../Component/ToastMsg';
-import { validateEmail, validateNumber, validatePassword } from '../../utils/Validator';
+import {ToastMsg} from '../../Component/ToastMsg';
+import {
+  validateEmail,
+  validateNumber,
+  validatePassword,
+} from '../../utils/Validator';
 
 const Signup: React.FC<SignupInterface> = props => {
   const {language, AddSignUpData} = AuthStore();
@@ -62,14 +66,16 @@ const Signup: React.FC<SignupInterface> = props => {
       ToastMsg('Please enter dob', 'bottom');
       return false;
     }
-    
-   
+
     if (!password) {
       ToastMsg('Please enter password', 'bottom');
       return false;
     }
     if (!validatePassword(password)) {
-      ToastMsg('Password must be 8+ chars, 1 uppercase, 1 special char.', 'bottom');
+      ToastMsg(
+        'Password must be 8+ chars, 1 uppercase, 1 special char.',
+        'bottom',
+      );
       return false;
     }
     if (!confirmPassword) {
@@ -97,7 +103,6 @@ const Signup: React.FC<SignupInterface> = props => {
     setTimeout(() => {
       props.navigation.navigate('MobileVerification');
     }, 100);
-   
   };
   useEffect(() => {
     if (show) {
@@ -140,6 +145,7 @@ const Signup: React.FC<SignupInterface> = props => {
             containerStyle={styles.inputStyle}
             placeholder={LanguageSelected.enterUserName[languageKey]}
             onChangeText={text => setUsername(text)}
+            eyeicon={false}
           />
           <Text style={styles.logintitle}>
             {LanguageSelected.email[languageKey]}
@@ -150,6 +156,7 @@ const Signup: React.FC<SignupInterface> = props => {
             placeholder={LanguageSelected.enterEmail[languageKey]}
             keyboardType="email-address"
             onChangeText={text => setEmail(text)}
+            eyeicon={false}
           />
           <Text style={styles.logintitle}>
             {LanguageSelected.mobileNo[languageKey]}
@@ -160,6 +167,7 @@ const Signup: React.FC<SignupInterface> = props => {
             placeholder={LanguageSelected.enterNumber[languageKey]}
             keyboardType="number-pad"
             onChangeText={text => setMobileNo(text)}
+            eyeicon={false}
           />
           <Text style={styles.logintitle}>
             {LanguageSelected.dateOfBirth[languageKey]}
@@ -169,6 +177,8 @@ const Signup: React.FC<SignupInterface> = props => {
             containerStyle={styles.inputStyle}
             placeholder={dob ? format(dob, 'dd/MM/yyyy') : 'dd/MM/YYYY'}
             onRightIconPress={() => setShowDate(true)}
+            eyeicon={false}
+            placeholderTextColor={Colors.fontColor}
           />
           <Text style={styles.logintitle}>
             {LanguageSelected.password[languageKey]}
@@ -178,6 +188,7 @@ const Signup: React.FC<SignupInterface> = props => {
             containerStyle={styles.inputStyle}
             placeholder={LanguageSelected.enterPassword[languageKey]}
             onChangeText={text => setPassword(text)}
+            eyeicon={true}
           />
           <Text style={styles.logintitle}>
             {LanguageSelected.confirmPassword[languageKey]}
@@ -187,6 +198,7 @@ const Signup: React.FC<SignupInterface> = props => {
             containerStyle={styles.inputStyle}
             placeholder={LanguageSelected.enterConfirmPassword[languageKey]}
             onChangeText={text => setConfirmPassword(text)}
+            eyeicon={true}
           />
           <Text style={styles.logintitle}>
             {LanguageSelected.selectGender[languageKey]}

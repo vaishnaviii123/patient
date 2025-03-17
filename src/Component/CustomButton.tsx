@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { fontScale, radiusScale } from '../utils/DimensionConstant';
-import { Fonts } from '../utils/Constants';
+import { Colors, Fonts } from '../utils/Constants';
 
 interface CustomButtonProps {
   title: string;
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     fontFamily:Fonts.Bold,
   },
   disabledButton: {
-    backgroundColor: '#A9A9A9',
+    backgroundColor: Colors.lightGrey,
   },
 });
 

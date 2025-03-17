@@ -43,17 +43,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
 
   return (
     <View style={styles.container}>
-      {resendVisible ? (
-        <TouchableOpacity onPress={() => setTimeLeft(initialTime)}>
-          <Text style={styles.resendText}>
-            {LanguageSelected.resend[languageKey]}
-          </Text>
-        </TouchableOpacity>
-      ) : (
-        <Text style={[styles.resendText, {color: Colors.fontColor}]}>
-                    {LanguageSelected.resend[languageKey]}
-        </Text>
-      )}
+     
       <Text style={styles.timerText}>{timeLeft} sec</Text>
     </View>
   );
