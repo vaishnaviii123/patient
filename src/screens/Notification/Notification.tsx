@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Text,
@@ -13,9 +13,44 @@ import {NotificationInterface} from './NotificationInterface';
 import LanguageSelected from '../../utils/LanguageSelected';
 import AuthStore from '../../zustand/store/AuthStore';
 
+const notifications = [
+  {
+    id: 1,
+    title: "You've Received a New Task",
+    description: "It's time to clean your room. Do it today and earn $5!",
+    time: 'Just Now',
+    icon: IMAGES.mailIcon,
+  },
+  {
+    id: 2,
+    title: 'Congratulations for Reward',
+    description:
+      "You helped with the dishes! That's a big help. Check your balance.",
+    time: '15 min',
+    icon: IMAGES.othersIcon,
+  },
+  {
+    id: 3,
+    title: 'Task Reminder',
+    description:
+      "Done with your homework yet? Don't slack around! Your $3 are waiting for you.",
+    time: '11:24 PM',
+    icon: IMAGES.bell,
+  },
+  {
+    id: 4,
+    title: 'Add a Partner',
+    description:
+      'Add your brother in cleaning the garage. You both will be paid double.',
+    time: '11:24 PM',
+    icon: IMAGES.blackProfileIcon,
+  },
+];
+
 const Notification: React.FC<NotificationInterface> = ({navigation}) => {
   const {language} = AuthStore();
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   return (
     <View style={styles.mainContainer}>
@@ -33,85 +68,50 @@ const Notification: React.FC<NotificationInterface> = ({navigation}) => {
           <View style={styles.Container}>
             <Text style={styles.header1}>Today</Text>
 
-            <View style={styles.subContainer}>
-              <View style={styles.leftContainer}>
-                <Text style={styles.subHead}>You've Received a New Task</Text>
-                <Text style={styles.txt}>
-                  It's time to clean your room. Do it today and earn $5!
-                </Text>
-              </View>
-              <View style={styles.rightContainer}>
-                <Text style={styles.txt1}>Just Now</Text>
-                <View style={styles.iconContainer}>
-                  <Image source={IMAGES.mailIcon} style={styles.icon} />
+            {notifications.slice(0, 2).map(item => (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => setSelectedId(item.id)}
+                style={[
+                  styles.subContainer,
+                  selectedId === item.id && {backgroundColor: '#F8FBFB'},
+                ]}>
+                <View style={styles.leftContainer}>
+                  <Text style={styles.subHead}>{item.title}</Text>
+                  <Text style={styles.txt}>{item.description}</Text>
                 </View>
-              </View>
-            </View>
 
-            <View style={styles.subContainer}>
-              <View style={styles.leftContainer}>
-                <Text style={styles.subHead}>Congratulations for Reward</Text>
-                <Text style={styles.txt}>
-                  You helped with the dishes! That's a big help. Check your
-                  balance.
-                </Text>
-              </View>
-              <View style={styles.rightContainer}>
-                <Text style={styles.txt1}>15 min</Text>
-                <View style={styles.iconContainer}>
-                  <Image source={IMAGES.othersIcon} style={styles.icon} />
+                <View style={styles.rightContainer}>
+                  <Text style={styles.txt1}>{item.time}</Text>
+                  <View style={styles.iconContainer}>
+                    <Image source={item.icon} style={styles.icon} />
+                  </View>
                 </View>
-              </View>
-            </View>
+              </TouchableOpacity>
+            ))}
 
             <Text style={styles.header1}>05 Auguest 2024</Text>
+            {notifications.slice(2, notifications.length).map(item => (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => setSelectedId(item.id)}
+                style={[
+                  styles.subContainer,
+                  selectedId === item.id && {backgroundColor: '#F8FBFB'},
+                ]}>
+                <View style={styles.leftContainer}>
+                  <Text style={styles.subHead}>{item.title}</Text>
+                  <Text style={styles.txt}>{item.description}</Text>
+                </View>
 
-            <View style={styles.subContainer}>
-              <View style={styles.leftContainer}>
-                <Text style={styles.subHead}>Task Reminder</Text>
-                <Text style={styles.txt}>
-                  Done with your homework yet? Don't slack around! Your $3 are
-                  waiting for you.{' '}
-                </Text>
-              </View>
-              <View style={styles.rightContainer}>
-                <Text style={styles.txt1}>11:24 PM</Text>
-                <View style={styles.iconContainer}>
-                  <Image source={IMAGES.bell} style={styles.icon} />
+                <View style={styles.rightContainer}>
+                  <Text style={styles.txt1}>{item.time}</Text>
+                  <View style={styles.iconContainer}>
+                    <Image source={item.icon} style={styles.icon} />
+                  </View>
                 </View>
-              </View>
-            </View>
-
-            <View style={styles.subContainer}>
-              <View style={styles.leftContainer}>
-                <Text style={styles.subHead}>Add a Partner</Text>
-                <Text style={styles.txt}>
-                  Add your brother in cleaning the garage. You both will paid
-                  double.
-                </Text>
-              </View>
-              <View style={styles.rightContainer}>
-                <Text style={styles.txt1}>11:24 PM</Text>
-                <View style={styles.iconContainer}>
-                  <Image source={IMAGES.blackProfileIcon} style={styles.icon} />
-                </View>
-              </View>
-            </View>
-            <View style={styles.subContainer}>
-              <View style={styles.leftContainer}>
-                <Text style={styles.subHead}>Add a Partner</Text>
-                <Text style={styles.txt}>
-                  Add your brother in cleaning the garage. You both will paid
-                  double.
-                </Text>
-              </View>
-              <View style={styles.rightContainer}>
-                <Text style={styles.txt1}>11:24 PM</Text>
-                <View style={styles.iconContainer}>
-                  <Image source={IMAGES.myProfileIcon} style={styles.icon} />
-                </View>
-              </View>
-            </View>
+              </TouchableOpacity>
+            ))}
           </View>
         </ScrollView>
       </ImageBackground>

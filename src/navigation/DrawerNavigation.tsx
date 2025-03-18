@@ -21,6 +21,7 @@ import Language from '../screens/Language/Language';
 import Logout from '../screens/Logout/Logout';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import EditProfile from '../screens/EditProfile/EditProfile';
+import Security from '../screens/Security/Security';
 import {IMAGES} from '../assets';
 import {
   fontScale,
@@ -217,15 +218,6 @@ const DrawerNavigation = () => {
           headerShown: false,
           drawerLabel: '',
           drawerLabelStyle: styles.label,
-          drawerIcon: () => (
-            <View style={styles.iconContainer}>
-              <Image
-                resizeMode="contain"
-                source={IMAGES.myProfileIcon}
-                style={styles.icon}
-              />
-            </View>
-          ),
         }}
       />
       <Drawer.Screen
@@ -313,8 +305,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // paddingVertical:verticalScale(10),
     paddingHorizontal: horizontalScale(26),
-    marginTop: verticalMarginScale(20),
-    marginBottom: verticalMarginScale(200),
+    // marginTop: verticalMarginScale(20),
+    // marginBottom: verticalMarginScale(200),
   },
   logoutLabel: {
     color: '#A30014',

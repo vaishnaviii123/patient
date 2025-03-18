@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
   pencilIcon: {
     height: verticalScale(22),
     width: horizontalScale(22),
-    alignSelf:'flex-start',
+    alignSelf: 'flex-start',
   },
   detailsContainer: {
     height: verticalScale(100),
@@ -397,8 +397,8 @@ const styles = StyleSheet.create({
     width: horizontalScale(360),
     height: verticalScale(66),
     position: 'absolute',
-    left: 14,
-    top: 535,
+    bottom: verticalScale(100),
+    alignSelf:'center',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0099FF',

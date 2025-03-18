@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
     width: horizontalScale(360),
     height: verticalScale(66),
     position: 'absolute',
-    left: 14,
-    top: 535,
+    bottom: verticalScale(100),
+    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0099FF',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     height: verticalScale(18),
     marginRight: horizontalMarginScale(10),
   },
-  mailIcon:{
+  mailIcon: {
     width: horizontalScale(17),
     height: verticalScale(15),
     marginRight: horizontalMarginScale(10),
