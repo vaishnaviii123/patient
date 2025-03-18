@@ -21,7 +21,7 @@ const HomeStore = create<HomeState>()(
             specializations: [],
             loading: false,
             error: null,
-            language: "EN",
+            language: "",
 
             fetchSpecializations: async (lang: string) => {
                 set({ loading: true, error: null });
