@@ -60,13 +60,13 @@ const BottomTab = () => {
           );
         },
         tabBarStyle: {
-          position: 'absolute',
+          // position: 'absolute',
           height: verticalScale(70),
-          // borderTopLeftRadius: 30,
-          // borderTopRightRadius: 30,
-          borderRadius: radiusScale(12),
+          borderTopLeftRadius:  radiusScale(12),
+          borderTopRightRadius:  radiusScale(12),
+          // borderRadius: radiusScale(12),
           backgroundColor: Colors.white,
-          marginBottom: verticalScale(5),
+          // marginBottom: verticalScale(5),
         },
         tabBarShowLabel: false,
         headerShown: false,

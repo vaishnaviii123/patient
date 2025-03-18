@@ -33,11 +33,13 @@ import {
 } from '../utils/DimensionConstant';
 import {Fonts} from '../utils/Constants';
 import BottomTab from './BottomTab';
+import AuthStore from '../zustand/store/AuthStore';
 const Drawer = createDrawerNavigator();
 
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 
 const customDrawerContent = (props: DrawerContentComponentProps) => {
+
   return (
     <DrawerContentScrollView
       {...props}
@@ -64,6 +66,7 @@ const customDrawerContent = (props: DrawerContentComponentProps) => {
 };
 
 const DrawerNavigation = () => {
+  const {clearUser}=AuthStore()
   return (
     <Drawer.Navigator drawerContent={customDrawerContent}>
       <Drawer.Screen
@@ -220,25 +223,23 @@ const DrawerNavigation = () => {
           drawerLabelStyle: styles.label,
         }}
       />
-      <Drawer.Screen
-        name="Logout"
-        component={Logout}
-        options={{
-          headerShown: false,
-          // drawerLabel: '',
-          drawerLabelStyle: {display: 'none'},
-          drawerIcon: () => (
-            <View style={styles.logoutContainer}>
-              <Text style={styles.logoutLabel}>Logout</Text>
-              <Image
-                resizeMode="contain"
-                source={IMAGES.logoutIcon}
-                style={styles.icon}
-              />
-            </View>
-          ),
-        }}
-      />
+     
+       <Drawer.Screen
+          name="Logout"
+          component={() => null} // Empty component for logout
+          options={{
+            drawerLabel: () => (
+              <TouchableOpacity onPress={()=>clearUser()} style={styles.logoutContainer}>
+                <Text style={styles.logoutLabel}>Logout</Text>
+                <Image
+                  resizeMode="contain"
+                  source={IMAGES.logoutIcon}
+                  style={styles.icon}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
     </Drawer.Navigator>
   );
 };

@@ -93,6 +93,7 @@ const AuthStore = create<UserState>()(
             data.navigation.navigate('SignIn');
             ToastMsg(userData.message, 'bottom');
           } else {
+            set({loading: false});
             ToastMsg('Invalid Credentials', 'bottom');
           }
         } catch (error) {
