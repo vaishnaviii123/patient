@@ -21,7 +21,6 @@ import Language from '../screens/Language/Language';
 import Logout from '../screens/Logout/Logout';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import EditProfile from '../screens/EditProfile/EditProfile';
-import Security from '../screens/Security/Security';
 import {IMAGES} from '../assets';
 import {
   fontScale,
