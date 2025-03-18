@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Image,
@@ -8,20 +8,26 @@ import {
   ImageBackground,
   FlatList,
   ScrollView,
+  ActivityIndicator
 } from 'react-native';
 import LanguageSelected from '../../utils/LanguageSelected';
-import {HomeScreenInterface} from './HomeScreenInterface';
-import {IMAGES} from '../../assets';
-import {Fonts} from '../../utils/Constants';
+import { HomeScreenInterface } from './HomeScreenInterface';
+import { IMAGES } from '../../assets';
+import { Fonts } from '../../utils/Constants';
 import AuthStore from '../../zustand/store/AuthStore';
+import HomeStore from '../../zustand/store/HomeStore';
 import styles from './HomeScreenStyle';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const CARD_WIDTH = width * 0.75; // 75% of screen width for card
 const SPACING = 15;
-const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
-  const {language} = AuthStore();
+const HomeScreen: React.FC<HomeScreenInterface> = ({ navigation }) => {
+  const { language } = AuthStore();
   const languageKey = language as keyof typeof LanguageSelected.Medicine;
+  const { specializations, loading, error, fetchSpecializations } = HomeStore(); // ✅ Using HomeStore
+  useEffect(() => {
+    fetchSpecializations(language);
+  }, [language]);
 
   const upcomingAppointments = [
     {
@@ -50,7 +56,7 @@ const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
     },
   ];
 
-  const renderUpcomingAppointments = ({item}: {item: any}) => (
+  const renderUpcomingAppointments = ({ item }: { item: any }) => (
     <TouchableOpacity
       style={styles.eventContainer}
       onPress={() => navigation.navigate('Appointment')}>
@@ -92,6 +98,16 @@ const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
     </TouchableOpacity>
   );
 
+  const renderSpecialization = ({ item }: { item: any }) => (
+    <View style={styles.container}>
+      <ImageBackground source={IMAGES.heart} style={styles.specImg} resizeMode="contain">
+        <View style={styles.specText}>
+          <Text style={{ fontFamily: Fonts.SemiBold }}>{item.name}</Text>
+        </View>
+      </ImageBackground>
+    </View>
+  );
+
   return (
     <View style={styles.mainContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -100,7 +116,7 @@ const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
             <TouchableOpacity
               // onPress={() => navigation.navigate('DrawerNavigation')}
               onPress={() => navigation.openDrawer()}
-              >
+            >
               <Image
                 source={IMAGES.profile}
                 style={styles.leftImg}
@@ -147,7 +163,7 @@ const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
             snapToInterval={CARD_WIDTH + SPACING}
             snapToAlignment="start"
             decelerationRate="fast"
-            contentContainerStyle={{paddingHorizontal: SPACING}}
+            contentContainerStyle={{ paddingHorizontal: SPACING }}
             data={upcomingAppointments}
             // keyExtractor={item => item.id}
             renderItem={renderUpcomingAppointments}
@@ -164,100 +180,20 @@ const HomeScreen: React.FC<HomeScreenInterface> = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View>
-          <View style={styles.speContainer}>
-            <View style={styles.subContainer}>
-              <View style={styles.container}>
-                <ImageBackground
-                  source={IMAGES.heart}
-                  style={styles.specImg}
-                  resizeMode="contain">
-                  <View style={styles.specText}>
-                    <Text style={{fontFamily: Fonts.SemiBold}}>
-                      {LanguageSelected.heart[languageKey]}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-              <View style={styles.container}>
-                <ImageBackground
-                  source={IMAGES.brain}
-                  style={styles.specImg}
-                  resizeMode="contain">
-                  <View style={styles.specText}>
-                    <Text style={{fontFamily: Fonts.SemiBold}}>
-                      {LanguageSelected.brain[languageKey]}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-            </View>
-            <View style={styles.subContainer}>
-              <View style={styles.container}>
-                <ImageBackground
-                  source={IMAGES.lungs}
-                  style={styles.specImg}
-                  resizeMode="contain">
-                  <View style={styles.specText}>
-                    <Text style={{fontFamily: Fonts.SemiBold}}>
-                      {LanguageSelected.lungs[languageKey]}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-              <View style={styles.container}>
-                <ImageBackground
-                  source={IMAGES.lungs}
-                  style={styles.specImg}
-                  resizeMode="contain">
-                  <View style={styles.specText}>
-                    <Text style={{fontFamily: Fonts.SemiBold}}>
-                      {LanguageSelected.dentist[languageKey]}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-            </View>
-            <View style={styles.subContainer}>
-              <View style={styles.largeImgContainer}>
-                <ImageBackground
-                  source={IMAGES.tablet}
-                  style={styles.largeImg}
-                  resizeMode="contain">
-                  <View style={styles.largeImgText}>
-                    <Text style={{fontFamily: Fonts.SemiBold}}>
-                      {LanguageSelected.general[languageKey]}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-            </View>
-            <View style={styles.subContainer}>
-              <View style={styles.container}>
-                <ImageBackground
-                  source={IMAGES.kidney}
-                  style={styles.specImg}
-                  resizeMode="contain">
-                  <View style={styles.specText}>
-                    <Text style={{fontFamily: Fonts.SemiBold}}>
-                      {LanguageSelected.kidney[languageKey]}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-              <View style={styles.container}>
-                <ImageBackground
-                  source={IMAGES.ear}
-                  style={styles.specImg}
-                  resizeMode="contain">
-                  <View style={styles.specText}>
-                    <Text style={{fontFamily: Fonts.SemiBold}}>
-                      {LanguageSelected.ear[languageKey]}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-            </View>
-          </View>
+          {loading ? (
+            <ActivityIndicator size="large" color="blue" />
+          ) : error ? (
+            <Text style={{ textAlign: 'center', color: 'red' }}>Failed to load data</Text>
+          ) : (
+            <FlatList
+              horizontal
+              data={specializations}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={renderSpecialization}
+              contentContainerStyle={{ paddingHorizontal: SPACING }}
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
         </View>
       </ScrollView>
     </View>

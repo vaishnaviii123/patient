@@ -30,21 +30,21 @@ const Language = (props: any) => {
   };
   const languages = [
     {
-      selectCode: 'EN',
+      selectCode: 'en',
       label: 'English',
       image: IMAGES.En,
       icon: IMAGES.greyArrow,
       selectedicon: IMAGES.blueArrow,
     },
     {
-      selectCode: 'FN',
+      selectCode: 'fr',
       label: 'French',
       image: IMAGES.French,
       icon: IMAGES.greyArrow,
       selectedicon: IMAGES.blueArrow,
     },
     {
-      selectCode: 'AR',
+      selectCode: 'ar',
       label: 'Arabic',
       image: IMAGES.Arabic,
       icon: IMAGES.greyArrow,
